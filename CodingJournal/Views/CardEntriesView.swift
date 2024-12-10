@@ -31,7 +31,7 @@ struct CardEntriesView: View {
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
                 .sheet(isPresented: $isShowingEntryModal) {
-                    
+                    AddNewEntryModal()
                 }
         }
     }
@@ -62,20 +62,20 @@ extension CardEntriesView {
                         .font(.callout.bold())
                         .foregroundStyle(.white)
                 }
+            }
+            
+            Button {
                 
-                Button {
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(.buttonBackground)
+                        .stroke(.white, lineWidth: 2)
+                        .frame(width: 35, height: 35)
                     
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(.buttonBackground)
-                            .stroke(.white, lineWidth: 2)
-                            .frame(width: 35, height: 35)
-                        
-                        Image(systemName: "arrow.up.arrow.down")
-                            .font(.callout.bold())
-                            .foregroundStyle(.white)
-                    }
+                    Image(systemName: "arrow.up.arrow.down")
+                        .font(.callout.bold())
+                        .foregroundStyle(.white)
                 }
             }
         }
