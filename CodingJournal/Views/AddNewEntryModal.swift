@@ -40,10 +40,9 @@ struct AddNewEntryModal: View {
                                         .stroke(.white, lineWidth: 2)
                                         .frame(width: 25, height: 25)
                                     
-                                    Text("⋯")
+                                    Image(systemName: "ellipsis")
                                         .foregroundStyle(.white)
                                         .font(.system(size: 14, weight: .bold))
-                                        .offset(y: -0.5)
                                 }
                             }
                             

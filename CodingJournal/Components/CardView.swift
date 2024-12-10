@@ -39,7 +39,7 @@ struct CardView: View {
                     Button {
                         
                     } label: {
-                        Text("...")
+                        Image(systemName: "ellipsis")
                             .foregroundStyle(.white)
                             .bold()
                     }
