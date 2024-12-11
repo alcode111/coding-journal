@@ -70,10 +70,12 @@ struct AddNewEntryModal: View {
                     }
                     
                     TextField("Title", text: $entry.title)
+                        .font(.title2.bold())
                     
                     Divider()
                     
                     TextField("Subtitle", text: $entry.subtitle)
+                        .font(.body.bold())
                     
                     Divider()
                     
