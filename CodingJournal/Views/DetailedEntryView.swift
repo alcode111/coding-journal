@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct DetailedEntryView: View {
+    @Environment(\.dismiss) var dismiss
     @Bindable var entry: Entry
     
     var body: some View {
@@ -40,8 +41,14 @@ struct DetailedEntryView: View {
                             }
                         }
                         
-                        Text("Done")
-                            .bold()
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Done")
+                                .foregroundStyle(.white)
+                                .bold()
+
+                        }
                     }
                 }
                 
