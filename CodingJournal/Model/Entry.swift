@@ -21,4 +21,24 @@ class Entry {
         self.date = date
         self.details = details
     }
+    
+    var formattedDate: String {
+        date.formatted(
+            .dateTime
+                .weekday(.abbreviated)
+                .month(.abbreviated)
+                .day()
+        )
+    }
+    
+    var formattedDateTime: String {
+        date.formatted(
+            .dateTime
+                .weekday(.abbreviated)
+                .month(.abbreviated)
+                .day()
+                .hour()
+                .minute()
+        )
+    }
 }
