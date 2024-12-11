@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct CardView: View {
-    let entry: Entry
+    @Environment(\.modelContext) var modelContext
+    
+    var entry: Entry
+    @State private var isShowingDeleteConfirmation = false
     
     var body: some View {
         VStack {
@@ -38,7 +41,18 @@ struct CardView: View {
                     
                     Spacer()
                     
-                    Button {
+                    Menu {
+                        Button {
+                            //Future implementation to edit card
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        
+                        Button(role: .destructive) {
+                            isShowingDeleteConfirmation = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
                         
                     } label: {
                         Image(systemName: "ellipsis")
@@ -55,8 +69,18 @@ struct CardView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 28)
                 .stroke(.white, lineWidth: 2.5)
-            )
+        )
         .padding(2)
+        .confirmationDialog("Delete Entry", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
+            Button("Delete", role: .destructive) {
+                withAnimation {
+                    modelContext.delete(entry)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Are you sure you want to delete this entry? This action cannot be undone.")
+        }
     }
 }
 
