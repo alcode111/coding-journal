@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddNewEntryModal: View {
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
-    @State private var title = ""
-    @State private var details = ""
-    
+    @Bindable var entry: Entry
+        
     var body: some View {
         ZStack {
             Color.mainBackground.opacity(0.5).ignoresSafeArea()
@@ -23,7 +24,7 @@ struct AddNewEntryModal: View {
                             dismiss()
                         } label : {
                             Text("Cancel")
-                                .foregroundStyle(.buttonBackground)
+                                .foregroundStyle(.mint.opacity(0.7))
                                 .bold()
                         }
                         
@@ -56,7 +57,8 @@ struct AddNewEntryModal: View {
                             Spacer()
                             
                             Button {
-                                
+                                modelContext.insert(entry)
+                                dismiss()
                             } label: {
                                 Text("Done")
                                     .foregroundStyle(.white)
@@ -67,11 +69,16 @@ struct AddNewEntryModal: View {
                         
                     }
                     
-                    TextField("Title", text: $title)
+                    TextField("Title", text: $entry.title)
                     
                     Divider()
                     
-                    TextField("Start writing...", text: $details, axis: .vertical)
+                    TextField("Subtitle", text: $entry.subtitle)
+                    
+                    Divider()
+                    
+                    TextField("Start writing here...", text: $entry.details, axis: .vertical)
+                        
                 }
                 .padding()
             }
@@ -80,5 +87,19 @@ struct AddNewEntryModal: View {
 }
 
 #Preview {
-    AddNewEntryModal()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Entry.self, configurations: config)
+        let entry = Entry(
+            title: "The 1st rule of Poetry Club",
+            subtitle: "GitHub Classroom",
+            date: Date.now,
+            details: """
+Yet another great GitHub Classroom Challenge. Here we are learning about the split method mostly. The tricky thing is that we had to acknowledge for the empty spaces as well as paying attention to the fact that this method returns an array of substrings so we would also have to be mindful of the return type. So much going on but it was definitely great to solve. I had to resort to the chaining of the map method. Using the shorthand syntax we map over each substring and simply convert them to strings using Swift’s String initializer.
+""")
+        return AddNewEntryModal(entry: entry)
+            .modelContainer(container)
+    } catch {
+        fatalError("Could not load the container.")
+    }
 }

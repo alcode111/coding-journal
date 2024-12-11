@@ -35,7 +35,11 @@ struct CardEntriesView: View {
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
                 .sheet(isPresented: $isShowingEntryModal) {
-                    AddNewEntryModal()
+                    AddNewEntryModal(entry:
+                                        Entry(title: "",
+                                              subtitle: "",
+                                              date: Date.now,
+                                              details: ""))
                 }
         }
     }
