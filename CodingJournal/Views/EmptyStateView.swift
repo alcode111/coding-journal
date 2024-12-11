@@ -22,7 +22,7 @@ struct EmptyStateView: View {
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.emptyStateForeground)
             
-            Text("Tap the plus button to get started.")
+            Text("Tap the plus button to get started")
                 .font(.title3.bold())
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.emptyStateForeground)

@@ -20,22 +20,25 @@ struct CardEntriesView: View {
             
             VStack(alignment: .leading) {
                 header
-                
-                ScrollView {
-                    VStack {
-                        ForEach(entries) { entry in
-                            CardView(entry: entry)
-                                .onTapGesture {
-                                    selectedEntry = entry
-                                    isShowingDetailedViewModal = true
-                                }
-                        }
-                        .fullScreenCover(item: $selectedEntry) { entry in
-                            DetailedEntryView(entry: entry)
+                if entries.isEmpty {
+                    EmptyStateView()
+                } else {
+                    ScrollView {
+                        VStack {
+                            ForEach(entries) { entry in
+                                CardView(entry: entry)
+                                    .onTapGesture {
+                                        selectedEntry = entry
+                                        isShowingDetailedViewModal = true
+                                    }
+                            }
+                            .fullScreenCover(item: $selectedEntry) { entry in
+                                DetailedEntryView(entry: entry)
+                            }
                         }
                     }
+                    .ignoresSafeArea(.container, edges: .bottom)
                 }
-                .ignoresSafeArea(.container, edges: .bottom)
             }
             .padding(.horizontal)
             .padding(.top, 40)
