@@ -19,7 +19,14 @@ struct AddNewEntryModal: View {
             ScrollView {
                 VStack {
                     HStack {
-                        Spacer()
+                        Button {
+                            dismiss()
+                        } label : {
+                            Text("Cancel")
+                                .foregroundStyle(.buttonBackground)
+                                .bold()
+                        }
+                        
                         Spacer()
                         
                         Text("\(Date.now, format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())")
@@ -49,7 +56,7 @@ struct AddNewEntryModal: View {
                             Spacer()
                             
                             Button {
-                                dismiss()
+                                
                             } label: {
                                 Text("Done")
                                     .foregroundStyle(.white)
@@ -59,7 +66,6 @@ struct AddNewEntryModal: View {
                         .frame(width: 100)
                         
                     }
-                    .padding(.horizontal, 8)
                     
                     TextField("Title", text: $title)
                     
