@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CardEntriesView: View {
     @State private var isShowingEntryModal = false
+    @Query var entries: [Entry]
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -19,7 +21,9 @@ struct CardEntriesView: View {
                 
                 ScrollView {
                     VStack {
-                        CardView()
+                        ForEach(entries) { entry in
+                            CardView(entry: entry)
+                        }
                     }
                 }
                 .ignoresSafeArea(.container, edges: .bottom)

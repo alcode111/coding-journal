@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct CardView: View {
+    let entry: Entry
+    
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
-                    Text("The 1st rule of poetry club")
+                    Text(entry.title)
                         .font(.title3.bold())
                     
-                    Text("GitHub Classroom")
+                    Text(entry.subtitle)
                         .font(.subheadline)
                         .fontWeight(.medium)
                 }
@@ -31,7 +33,7 @@ struct CardView: View {
                     .foregroundStyle(.white)
                 
                 HStack {
-                    Text("Fri, 6th Dec")
+                    Text(entry.formattedDate)
                         .font(.caption)
                     
                     Spacer()
@@ -59,5 +61,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView()
+    CardView(entry: Entry(title: "The 1st rule of Poetry Club", subtitle: "GitHub Classroom", date: Date.now, details: ""))
 }
