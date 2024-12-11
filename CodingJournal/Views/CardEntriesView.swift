@@ -10,6 +10,8 @@ import SwiftData
 
 struct CardEntriesView: View {
     @State private var isShowingEntryModal = false
+    @State private var isShowingDetailedViewModal = false
+    @State private var selectedEntry: Entry?
     @Query var entries: [Entry]
     
     var body: some View {
@@ -23,6 +25,13 @@ struct CardEntriesView: View {
                     VStack {
                         ForEach(entries) { entry in
                             CardView(entry: entry)
+                                .onTapGesture {
+                                    selectedEntry = entry
+                                    isShowingDetailedViewModal = true
+                                }
+                        }
+                        .fullScreenCover(item: $selectedEntry) { entry in
+                            DetailedEntryView(entry: entry)
                         }
                     }
                 }
