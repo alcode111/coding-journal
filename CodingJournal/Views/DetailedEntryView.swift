@@ -32,11 +32,11 @@ struct DetailedEntryView: View {
                                     .frame(width: 20, height: 20)
                                 
                                 Circle()
-                                    .stroke(.white, lineWidth: 2)
+                                    .stroke(Color(.label), lineWidth: 2)
                                     .frame(width: 20, height: 20)
                                 
                                 Image(systemName: "ellipsis")
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color(.label))
                                     .font(.system(size: 14, weight: .bold))
                             }
                         }
@@ -45,7 +45,7 @@ struct DetailedEntryView: View {
                             dismiss()
                         } label: {
                             Text("Done")
-                                .foregroundStyle(.white)
+                                .foregroundStyle(Color(.label))
                                 .bold()
 
                         }
