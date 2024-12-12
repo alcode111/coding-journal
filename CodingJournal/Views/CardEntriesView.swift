@@ -10,9 +10,7 @@ import SwiftData
 
 struct CardEntriesView: View {
     @State private var isShowingEntryModal = false
-    @State private var isShowingDetailedViewModal = false
-    @State private var selectedEntry: Entry?
-    @Query var entries: [Entry]
+    @State private var sortOrder = SortDescriptor(\Entry.date, order: .reverse)
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -22,27 +20,7 @@ struct CardEntriesView: View {
                     header
                         .padding(.horizontal, 8)
 
-                    if entries.isEmpty {
-                        EmptyStateView()
-                    } else {
-                        ScrollView {
-                            VStack {
-                                ForEach(entries) { entry in
-                                    CardView(entry: entry)
-                                        .onTapGesture {
-                                            selectedEntry = entry
-                                            isShowingDetailedViewModal = true
-                                        }
-                                        .padding([.horizontal, .vertical], 8)
-                                }
-                                .fullScreenCover(item: $selectedEntry) { entry in
-                                    DetailedEntryView(entry: entry)
-                                }
-                            }
-                        }
-                        .ignoresSafeArea(.container, edges: .bottom)
-                        .padding(.bottom, 78)
-                    }
+                    CardEntriesListingView(sort: sortOrder)
                 }
                 .padding(.top, 40)
                 .padding(.horizontal)
@@ -89,8 +67,17 @@ extension CardEntriesView {
                 }
             }
             
-            Button {
-                
+            Menu {
+                Picker("Sort", selection: $sortOrder) {
+                    Text("Date")
+                        .tag(SortDescriptor(\Entry.date, order: .reverse))
+                    
+                    Text("Title")
+                        .tag(SortDescriptor(\Entry.title))
+                    
+                    Text("Subtitle")
+                        .tag(SortDescriptor(\Entry.subtitle))
+                }
             } label: {
                 ZStack {
                     Circle()
