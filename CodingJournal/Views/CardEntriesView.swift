@@ -10,21 +10,27 @@ import SwiftData
 
 struct CardEntriesView: View {
     @State private var isShowingEntryModal = false
+    @State private var isSearchActive = false
     @State private var sortOrder = SortDescriptor(\Entry.date, order: .reverse)
+    @State private var searchText = ""
     
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.mainBackground.ignoresSafeArea()
             
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                if isSearchActive {
+                    searchHeader
+                } else {
                     header
                         .padding(.horizontal, 8)
-
-                    CardEntriesListingView(sort: sortOrder)
                 }
-                .padding(.top, 40)
-                .padding(.horizontal)
-
+                
+                CardEntriesListingView(sort: sortOrder, searchString: searchText)
+            }
+            .padding(.top, 40)
+            .padding(.horizontal)
+            
             PlusButton(isShowingModal: $isShowingEntryModal)
                 .padding(.top, 8)
                 .frame(maxWidth: .infinity)
@@ -45,6 +51,45 @@ struct CardEntriesView: View {
 }
 
 extension CardEntriesView {
+    private var searchHeader: some View {
+            HStack {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(.secondary)
+                    
+                    TextField("Search entries...", text: $searchText)
+                        .textFieldStyle(.plain)
+                    
+                    if !searchText.isEmpty {
+                        Button {
+                            searchText = ""
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .padding(8)
+                .background(Color(.systemGray6))
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 28)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 28)
+                        .stroke(Color(.label), lineWidth: 2.5)
+                )
+                
+                Button {
+                    searchText = ""
+                    isSearchActive = false
+                } label: {
+                    Text("Cancel")
+                        .foregroundStyle(.mint.opacity(0.7))
+                }
+            }
+            .padding(.horizontal, 8)
+        }
+    
     private var header: some View {
         HStack {
             Text("Coding Journal")
@@ -53,18 +98,9 @@ extension CardEntriesView {
             Spacer()
             
             Button {
-                
+                isSearchActive = true
             } label: {
-                ZStack {
-                    Circle()
-                        .fill(.buttonBackground)
-                        .stroke(Color(.label), lineWidth: 2)
-                        .frame(width: 35, height: 35)
-                    
-                    Image(systemName: "magnifyingglass")
-                        .font(.callout.bold())
-                        .foregroundStyle(Color(.label))
-                }
+                HeaderButton(systemName: "magnifyingglass")
             }
             
             Menu {
@@ -79,16 +115,7 @@ extension CardEntriesView {
                         .tag(SortDescriptor(\Entry.subtitle))
                 }
             } label: {
-                ZStack {
-                    Circle()
-                        .fill(.buttonBackground)
-                        .stroke(Color(.label), lineWidth: 2)
-                        .frame(width: 35, height: 35)
-                    
-                    Image(systemName: "arrow.up.arrow.down")
-                        .font(.callout.bold())
-                        .foregroundStyle(Color(.label))
-                }
+                HeaderButton(systemName: "arrow.up.arrow.down")
             }
         }
     }

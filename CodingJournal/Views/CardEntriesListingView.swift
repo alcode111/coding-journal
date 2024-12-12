@@ -41,11 +41,17 @@ struct CardEntriesListingView: View {
         }
     }
     
-    init(sort: SortDescriptor<Entry>) {
-        _entries = Query(sort: [sort])
+    init(sort: SortDescriptor<Entry>, searchString: String) {
+        _entries = Query(filter: #Predicate {
+            if searchString.isEmpty {
+                return true
+            } else {
+                return $0.title.localizedStandardContains(searchString)
+            }
+        }, sort: [sort])
     }
 }
 
 #Preview {
-    CardEntriesListingView(sort: SortDescriptor(\Entry.date, order: .reverse))
+    CardEntriesListingView(sort: SortDescriptor(\Entry.date, order: .reverse), searchString: "")
 }
