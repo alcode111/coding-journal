@@ -20,12 +20,12 @@ struct PlusButton: View {
                     .frame(width: 70, height: 70)
                     .overlay {
                         Circle()
-                            .stroke(.white, lineWidth: 2)
+                            .stroke(Color(.label), lineWidth: 2)
                     }
                 
                 Image(systemName: "plus")
                     .font(.title.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color(.label))
             }
         }
     }
