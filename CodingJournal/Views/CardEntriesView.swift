@@ -10,40 +10,23 @@ import SwiftData
 
 struct CardEntriesView: View {
     @State private var isShowingEntryModal = false
-    @State private var isShowingDetailedViewModal = false
-    @State private var selectedEntry: Entry?
-    @Query var entries: [Entry]
+    @State private var sortOrder = SortDescriptor(\Entry.date, order: .reverse)
     
     var body: some View {
         ZStack(alignment: .bottom) {
             Color.mainBackground.ignoresSafeArea()
             
-            VStack(alignment: .leading) {
-                header
-                if entries.isEmpty {
-                    EmptyStateView()
-                } else {
-                    ScrollView {
-                        VStack {
-                            ForEach(entries) { entry in
-                                CardView(entry: entry)
-                                    .onTapGesture {
-                                        selectedEntry = entry
-                                        isShowingDetailedViewModal = true
-                                    }
-                            }
-                            .fullScreenCover(item: $selectedEntry) { entry in
-                                DetailedEntryView(entry: entry)
-                            }
-                        }
-                    }
-                    .ignoresSafeArea(.container, edges: .bottom)
+                VStack(alignment: .leading) {
+                    header
+                        .padding(.horizontal, 8)
+
+                    CardEntriesListingView(sort: sortOrder)
                 }
-            }
-            .padding(.horizontal)
-            .padding(.top, 40)
-            
+                .padding(.top, 40)
+                .padding(.horizontal)
+
             PlusButton(isShowingModal: $isShowingEntryModal)
+                .padding(.top, 8)
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
                 .sheet(isPresented: $isShowingEntryModal) {
@@ -75,27 +58,36 @@ extension CardEntriesView {
                 ZStack {
                     Circle()
                         .fill(.buttonBackground)
-                        .stroke(.white, lineWidth: 2)
+                        .stroke(Color(.label), lineWidth: 2)
                         .frame(width: 35, height: 35)
                     
                     Image(systemName: "magnifyingglass")
                         .font(.callout.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color(.label))
                 }
             }
             
-            Button {
-                
+            Menu {
+                Picker("Sort", selection: $sortOrder) {
+                    Text("Date")
+                        .tag(SortDescriptor(\Entry.date, order: .reverse))
+                    
+                    Text("Title")
+                        .tag(SortDescriptor(\Entry.title))
+                    
+                    Text("Subtitle")
+                        .tag(SortDescriptor(\Entry.subtitle))
+                }
             } label: {
                 ZStack {
                     Circle()
                         .fill(.buttonBackground)
-                        .stroke(.white, lineWidth: 2)
+                        .stroke(Color(.label), lineWidth: 2)
                         .frame(width: 35, height: 35)
                     
                     Image(systemName: "arrow.up.arrow.down")
                         .font(.callout.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color(.label))
                 }
             }
         }

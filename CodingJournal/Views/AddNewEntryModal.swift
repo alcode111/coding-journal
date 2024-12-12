@@ -29,6 +29,7 @@ struct AddNewEntryModal: View {
                         }
                         
                         Spacer()
+                        Spacer()
                         
                         Text("\(Date.now, format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())")
                             .bold()
@@ -45,11 +46,11 @@ struct AddNewEntryModal: View {
                                         .frame(width: 25, height: 25)
                                     
                                     Circle()
-                                        .stroke(.white, lineWidth: 2)
+                                        .stroke(Color(.label), lineWidth: 2)
                                         .frame(width: 25, height: 25)
                                     
                                     Image(systemName: "ellipsis")
-                                        .foregroundStyle(.white)
+                                        .foregroundStyle(Color(.label))
                                         .font(.system(size: 14, weight: .bold))
                                 }
                             }
@@ -61,7 +62,7 @@ struct AddNewEntryModal: View {
                                 dismiss()
                             } label: {
                                 Text("Done")
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(Color(.label))
                                     .bold()
                             }
                         }

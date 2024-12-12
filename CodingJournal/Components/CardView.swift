@@ -33,7 +33,7 @@ struct CardView: View {
                 Rectangle()
                     .frame(maxWidth: .infinity)
                     .frame(height: 2)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color(.label))
                 
                 HStack {
                     Text(entry.formattedDate)
@@ -56,7 +56,7 @@ struct CardView: View {
                         
                     } label: {
                         Image(systemName: "ellipsis")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color(.label))
                             .bold()
                     }
                 }
@@ -68,7 +68,7 @@ struct CardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 28))
         .overlay(
             RoundedRectangle(cornerRadius: 28)
-                .stroke(.white, lineWidth: 2.5)
+                .stroke(Color(.label), lineWidth: 2.5)
         )
         .padding(2)
         .confirmationDialog("Delete Entry", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
