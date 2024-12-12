@@ -18,32 +18,37 @@ struct CardEntriesView: View {
         ZStack(alignment: .bottom) {
             Color.mainBackground.ignoresSafeArea()
             
-            VStack(alignment: .leading) {
-                header
-                if entries.isEmpty {
-                    EmptyStateView()
-                } else {
-                    ScrollView {
-                        VStack {
-                            ForEach(entries) { entry in
-                                CardView(entry: entry)
-                                    .onTapGesture {
-                                        selectedEntry = entry
-                                        isShowingDetailedViewModal = true
-                                    }
-                            }
-                            .fullScreenCover(item: $selectedEntry) { entry in
-                                DetailedEntryView(entry: entry)
+                VStack(alignment: .leading) {
+                    header
+                        .padding(.horizontal, 8)
+
+                    if entries.isEmpty {
+                        EmptyStateView()
+                    } else {
+                        ScrollView {
+                            VStack {
+                                ForEach(entries) { entry in
+                                    CardView(entry: entry)
+                                        .onTapGesture {
+                                            selectedEntry = entry
+                                            isShowingDetailedViewModal = true
+                                        }
+                                        .padding([.horizontal, .vertical], 8)
+                                }
+                                .fullScreenCover(item: $selectedEntry) { entry in
+                                    DetailedEntryView(entry: entry)
+                                }
                             }
                         }
+                        .ignoresSafeArea(.container, edges: .bottom)
+                        .padding(.bottom, 78)
                     }
-                    .ignoresSafeArea(.container, edges: .bottom)
                 }
-            }
-            .padding(.horizontal)
-            .padding(.top, 40)
-            
+                .padding(.top, 40)
+                .padding(.horizontal)
+
             PlusButton(isShowingModal: $isShowingEntryModal)
+                .padding(.top, 8)
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
                 .sheet(isPresented: $isShowingEntryModal) {
