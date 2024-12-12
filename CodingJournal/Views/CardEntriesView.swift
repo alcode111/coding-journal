@@ -75,12 +75,12 @@ extension CardEntriesView {
                 ZStack {
                     Circle()
                         .fill(.buttonBackground)
-                        .stroke(.white, lineWidth: 2)
+                        .stroke(Color(.label), lineWidth: 2)
                         .frame(width: 35, height: 35)
                     
                     Image(systemName: "magnifyingglass")
                         .font(.callout.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color(.label))
                 }
             }
             
@@ -90,12 +90,12 @@ extension CardEntriesView {
                 ZStack {
                     Circle()
                         .fill(.buttonBackground)
-                        .stroke(.white, lineWidth: 2)
+                        .stroke(Color(.label), lineWidth: 2)
                         .frame(width: 35, height: 35)
                     
                     Image(systemName: "arrow.up.arrow.down")
                         .font(.callout.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color(.label))
                 }
             }
         }
