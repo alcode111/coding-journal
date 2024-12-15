@@ -12,6 +12,7 @@ struct CardView: View {
     
     var entry: Entry
     @State private var isShowingDeleteConfirmation = false
+    @State private var isShowingDetailedEntryView = false
     
     var body: some View {
         VStack {
@@ -43,7 +44,7 @@ struct CardView: View {
                     
                     Menu {
                         Button {
-                            //Future implementation to edit card
+                            isShowingDetailedEntryView = true
                         } label: {
                             Label("Edit", systemImage: "pencil")
                         }
@@ -66,6 +67,9 @@ struct CardView: View {
                 .padding(.horizontal, 25)
                 .padding(.bottom, 8)
             }
+        }
+        .fullScreenCover(isPresented: $isShowingDetailedEntryView) {
+            DetailedEntryView(entry: entry)
         }
         .background(.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
