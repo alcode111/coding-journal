@@ -61,9 +61,7 @@ struct CardView: View {
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())
                     }
-                    .menuStyle(.borderlessButton)
-                    .menuIndicator(.hidden)
-                    .fixedSize()
+                    .padding(.vertical, -8)
                 }
                 .padding(.horizontal, 25)
                 .padding(.bottom, 8)
@@ -75,7 +73,6 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 28)
                 .stroke(Color(.label), lineWidth: 2.5)
         )
-        .buttonStyle(CardPressButtonStyle())
         .padding(2)
         .confirmationDialog("Delete Entry", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {
