@@ -60,7 +60,7 @@ struct CardView: View {
                             .foregroundStyle(Color(.label))
                             .bold()
                             .frame(width: 44, height: 44)
-                            .contentShape(Rectangle())
+                            .padding(.trailing, -12)
                     }
                     .padding(.vertical, -8)
                 }
