@@ -47,19 +47,22 @@ struct DetailedEntryView: View {
                             Text("Done")
                                 .foregroundStyle(Color(.label))
                                 .bold()
-
+                            
                         }
                     }
                 }
                 
                 TextField("Title", text: $entry.title)
                     .font(.title.bold())
+                    .accessibilityHint("Edit the entry title")
                 
                 TextField("Subtitle", text: $entry.subtitle)
                     .font(.title2.bold())
+                    .accessibilityHint("Edit the entry subtitle")
                 
                 TextField("Details", text: $entry.details, axis: .vertical)
-                .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.leading)
+                    .accessibilityHint("Edit the main content of your entry")
             }
             .padding()
         }

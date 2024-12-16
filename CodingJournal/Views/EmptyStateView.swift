@@ -31,6 +31,8 @@ struct EmptyStateView: View {
         }
         .frame(maxWidth: .infinity)
         .offset(y: -50)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Empty journal state: Keep track of your coding. Always remember how you solved it. Tap the plus button to get started.")
     }
 }
 #Preview {
