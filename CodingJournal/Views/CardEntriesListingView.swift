@@ -30,6 +30,10 @@ struct CardEntriesListingView: View {
                                 isShowingDetailedViewModal = true
                             }
                             .padding([.horizontal, .vertical], 8)
+                            .accessibilityElement(children: .combine)
+                            .accessibilityLabel("Journal entry: \(entry.title)")
+                            .accessibilityHint("Double tap to view full entry")
+                        
                     }
                     .fullScreenCover(item: $selectedEntry) { entry in
                         DetailedEntryView(entry: entry)

@@ -43,6 +43,8 @@ struct CardEntriesView: View {
                                                   date: Date.now,
                                                   details: ""))
                     }
+                    .accessibilityLabel("Add new journal entry")
+                    .accessibilityHint("Double tap to create a new coding journal entry")
             }
         }
     }
@@ -61,6 +63,8 @@ extension CardEntriesView {
                 
                 TextField("Search entries...", text: $searchText)
                     .textFieldStyle(.plain)
+                    .accessibilityLabel("Search journal entries")
+                    .accessibilityHint("Enter text to filter journal entries")
                 
                 if !searchText.isEmpty {
                     Button {
@@ -109,12 +113,15 @@ extension CardEntriesView {
                 Picker("Sort", selection: $sortOrder) {
                     Text("Date")
                         .tag(SortDescriptor(\Entry.date, order: .reverse))
+                        .accessibilityLabel("Sort by date, newest first")
                     
                     Text("Title")
                         .tag(SortDescriptor(\Entry.title))
+                        .accessibilityLabel("Sort alphabetically by title")
                     
                     Text("Subtitle")
                         .tag(SortDescriptor(\Entry.subtitle))
+                        .accessibilityLabel("Sort alphabetically by subtitle")
                 }
             } label: {
                 HeaderButton(systemName: "arrow.up.arrow.down")
