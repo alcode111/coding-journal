@@ -12,6 +12,7 @@ struct CardView: View {
     
     var entry: Entry
     @State private var isShowingDeleteConfirmation = false
+    @State private var isShowingDetailedEntryView = false
     
     var body: some View {
         VStack {
@@ -43,7 +44,7 @@ struct CardView: View {
                     
                     Menu {
                         Button {
-                            //Future implementation to edit card
+                            isShowingDetailedEntryView = true
                         } label: {
                             Label("Edit", systemImage: "pencil")
                         }
@@ -61,13 +62,14 @@ struct CardView: View {
                             .frame(width: 44, height: 44)
                             .contentShape(Rectangle())
                     }
-                    .menuStyle(.borderlessButton)
-                    .menuIndicator(.hidden)
-                    .fixedSize()
+                    .padding(.vertical, -8)
                 }
                 .padding(.horizontal, 25)
                 .padding(.bottom, 8)
             }
+        }
+        .fullScreenCover(isPresented: $isShowingDetailedEntryView) {
+            DetailedEntryView(entry: entry)
         }
         .background(.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
@@ -75,7 +77,6 @@ struct CardView: View {
             RoundedRectangle(cornerRadius: 28)
                 .stroke(Color(.label), lineWidth: 2.5)
         )
-        .buttonStyle(CardPressButtonStyle())
         .padding(2)
         .confirmationDialog("Delete Entry", isPresented: $isShowingDeleteConfirmation, titleVisibility: .visible) {
             Button("Delete", role: .destructive) {

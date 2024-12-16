@@ -31,17 +31,19 @@ struct CardEntriesView: View {
             .padding(.top, 40)
             .padding(.horizontal)
             
-            PlusButton(isShowingModal: $isShowingEntryModal)
-                .padding(.top, 8)
-                .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial)
-                .sheet(isPresented: $isShowingEntryModal) {
-                    AddNewEntryModal(entry:
-                                        Entry(title: "",
-                                              subtitle: "",
-                                              date: Date.now,
-                                              details: ""))
-                }
+            if !isSearchActive {
+                PlusButton(isShowingModal: $isShowingEntryModal)
+                    .padding(.top, 8)
+                    .frame(maxWidth: .infinity)
+                    .background(.ultraThinMaterial)
+                    .sheet(isPresented: $isShowingEntryModal) {
+                        AddNewEntryModal(entry:
+                                            Entry(title: "",
+                                                  subtitle: "",
+                                                  date: Date.now,
+                                                  details: ""))
+                    }
+            }
         }
     }
 }
@@ -52,43 +54,43 @@ struct CardEntriesView: View {
 
 extension CardEntriesView {
     private var searchHeader: some View {
+        HStack {
             HStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(.secondary)
-                    
-                    TextField("Search entries...", text: $searchText)
-                        .textFieldStyle(.plain)
-                    
-                    if !searchText.isEmpty {
-                        Button {
-                            searchText = ""
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundStyle(.secondary)
-                        }
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.secondary)
+                
+                TextField("Search entries...", text: $searchText)
+                    .textFieldStyle(.plain)
+                
+                if !searchText.isEmpty {
+                    Button {
+                        searchText = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .padding(8)
-                .background(Color(.systemGray6))
-                .clipShape(
-                    RoundedRectangle(cornerRadius: 28)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 28)
-                        .stroke(Color(.label), lineWidth: 2.5)
-                )
-                
-                Button {
-                    searchText = ""
-                    isSearchActive = false
-                } label: {
-                    Text("Cancel")
-                        .foregroundStyle(.mint.opacity(0.7))
-                }
             }
-            .padding(.horizontal, 8)
+            .padding(8)
+            .background(Color(.systemGray6))
+            .clipShape(
+                RoundedRectangle(cornerRadius: 28)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 28)
+                    .stroke(Color(.label), lineWidth: 2.5)
+            )
+            
+            Button {
+                searchText = ""
+                isSearchActive = false
+            } label: {
+                Text("Cancel")
+                    .foregroundStyle(.mint.opacity(0.7))
+            }
         }
+        .padding(.horizontal, 8)
+    }
     
     private var header: some View {
         HStack {
