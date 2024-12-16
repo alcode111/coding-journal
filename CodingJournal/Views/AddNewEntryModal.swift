@@ -26,6 +26,7 @@ struct AddNewEntryModal: View {
                             Text("Cancel")
                                 .foregroundStyle(.mint.opacity(0.7))
                                 .bold()
+                                .accessibilityLabel("Cancel adding new entry")
                         }
                         
                         Spacer()
@@ -72,15 +73,18 @@ struct AddNewEntryModal: View {
                     
                     TextField("Title", text: $entry.title)
                         .font(.title2.bold())
+                        .accessibilityHint("Enter the title for your coding journal entry")
                     
                     Divider()
                     
                     TextField("Subtitle", text: $entry.subtitle)
                         .font(.body.bold())
+                        .accessibilityHint("Enter a subtitle for your coding journal entry")
                     
                     Divider()
                     
                     TextField("Start writing here...", text: $entry.details, axis: .vertical)
+                        .accessibilityHint("Enter the main content of your journal entry")
                         
                 }
                 .padding()
