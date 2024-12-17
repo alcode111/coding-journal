@@ -28,6 +28,9 @@ struct CardView: View {
                 .padding(.top, 25)
                 .padding(.horizontal, 25)
                 .padding(.bottom, 8)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("Entry")
+                .accessibilityValue("\(entry.title), \(entry.subtitle)")
                 
                 Spacer().frame(height: 25)
                 
@@ -39,6 +42,8 @@ struct CardView: View {
                 HStack {
                     Text(entry.formattedDate)
                         .font(.caption)
+                        .accessibilityLabel("Created on")
+                        .accessibilityValue("\(entry.formattedDate)")
                     
                     Spacer()
                     
@@ -63,9 +68,12 @@ struct CardView: View {
                             .padding(.trailing, -12)
                     }
                     .padding(.vertical, -8)
+                    .accessibilityLabel("More actions")
+                    .accessibilityHint("Double tap to open menu. Use two finger scrub gesture to dismiss menu.")
                 }
                 .padding(.horizontal, 25)
                 .padding(.bottom, 8)
+                .accessibilityElement(children: .contain)
             }
         }
         .fullScreenCover(isPresented: $isShowingDetailedEntryView) {
