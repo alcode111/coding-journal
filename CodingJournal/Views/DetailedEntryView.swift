@@ -18,6 +18,7 @@ struct DetailedEntryView: View {
                 HStack {
                     HStack {
                         Text(entry.formattedDateTime)
+                            .accessibilityLabel("Entry date: \(entry.formattedDateTime)")
                     }
                     
                     Spacer()
@@ -40,6 +41,7 @@ struct DetailedEntryView: View {
                                     .font(.system(size: 14, weight: .bold))
                             }
                         }
+                        .accessibilityLabel("More options")
                         
                         Button {
                             dismiss()
@@ -47,19 +49,26 @@ struct DetailedEntryView: View {
                             Text("Done")
                                 .foregroundStyle(Color(.label))
                                 .bold()
-
                         }
+                        .accessibilityLabel("Close entry")
+                        .accessibilityHint("Double tap to save changes and return")
                     }
                 }
                 
                 TextField("Title", text: $entry.title)
                     .font(.title.bold())
+                    .accessibilityLabel("Entry title")
+                    .accessibilityHint("Enter the title for your journal entry")
                 
                 TextField("Subtitle", text: $entry.subtitle)
                     .font(.title2.bold())
+                    .accessibilityLabel("Entry subtitle")
+                    .accessibilityHint("Enter a subtitle for your journal entry")
                 
                 TextField("Details", text: $entry.details, axis: .vertical)
-                .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.leading)
+                    .accessibilityLabel("Entry details")
+                    .accessibilityHint("Enter the main content of your journal entry")
             }
             .padding()
         }
