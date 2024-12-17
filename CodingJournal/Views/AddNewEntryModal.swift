@@ -27,12 +27,15 @@ struct AddNewEntryModal: View {
                                 .foregroundStyle(.mint.opacity(0.7))
                                 .bold()
                         }
+                        .accessibilityLabel("Cancel entry")
+                        .accessibilityHint("Double tap to discard change and return")
                         
                         Spacer()
                         Spacer()
                         
                         Text("\(Date.now, format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())")
                             .bold()
+                            .accessibilityLabel("Current date: \(Date.now, format: .dateTime.weekday(.abbreviated).month(.abbreviated).day())")
                         
                         Spacer()
                         
@@ -54,6 +57,7 @@ struct AddNewEntryModal: View {
                                         .font(.system(size: 14, weight: .bold))
                                 }
                             }
+                            .accessibilityLabel("More options")
                             
                             Spacer()
                             
@@ -65,6 +69,8 @@ struct AddNewEntryModal: View {
                                     .foregroundStyle(Color(.label))
                                     .bold()
                             }
+                            .accessibilityLabel("Done")
+                            .accessibilityHint("Double tap to save the new entry")
                         }
                         .frame(width: 100)
                         
@@ -72,15 +78,21 @@ struct AddNewEntryModal: View {
                     
                     TextField("Title", text: $entry.title)
                         .font(.title2.bold())
+                        .accessibilityLabel("New entry title")
+                        .accessibilityHint("Enter the title for your new journal entry")
                     
                     Divider()
                     
                     TextField("Subtitle", text: $entry.subtitle)
                         .font(.body.bold())
+                        .accessibilityLabel("New entry subtitle")
+                        .accessibilityHint("Enter a subtitle or category for your new entry")
                     
                     Divider()
                     
                     TextField("Start writing here...", text: $entry.details, axis: .vertical)
+                        .accessibilityLabel("New entry details")
+                        .accessibilityHint("Enter the main content of your new journal entry")
                         
                 }
                 .padding()
