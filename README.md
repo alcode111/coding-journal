@@ -110,4 +110,4 @@ The app's design draws inspiration from two popular journaling applications:
 - I took Colt Steele's [The Git & GitHub Bootcamp](https://www.udemy.com/course/git-and-github-bootcamp/learn/lecture/24507864?start=195#content) course on Udemy (absolutely loved it!).
 
 ## Author
-- [alcode111](https://github.com/yourgithubusername)
+- [alcode111](https://github.com/alcode111)
