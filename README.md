@@ -105,6 +105,13 @@ The app's design draws inspiration from two popular journaling applications:
 - Swift 5.9 or later
 
 ## Credits
+![iTour](README-screens/paul-hudson-itour.png)
+
+- The code base is hugely inspired from [Paul Hudson's iTour tutorial](https://www.youtube.com/watch?v=FEKCAzPAtpg&list=PLuoeXyslFTuZ9Nag8qTVz5wQ7zRprxMxN) on Youtube. It was challenging because iTour has a NavigationStack and a List whilst I had to work with custom components.
+
+_______________________________________________________________________
+
+
 ![Udemy](README-screens/git-github-course.png)
 
 - I took Colt Steele's [The Git & GitHub Bootcamp](https://www.udemy.com/course/git-and-github-bootcamp/learn/lecture/24507864?start=195#content) course on Udemy (absolutely loved it!).
